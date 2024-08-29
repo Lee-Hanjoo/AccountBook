@@ -7,34 +7,26 @@ const List = () => {
 
   // 데이터가 들어오지도 않았는데 부르려고하니 안나옴.
   // data.length가 있을때만 실행해라~
-  const listItem2024 = data.length && data[0]["year2024"].map((item)=>{
-    return <li>
-              <div className='date-wrap'>
-                <p className='date'>{item.date}</p>
-                <p className='memo'>{item.memo}</p>
-              </div>
-              <p className={`amount ${item.type === '수입' ? "in" : "out"}`}>{item.type === '수입' ? "+" : "-"}{item.amount}</p>
-            </li>
-  })
-  const listItem2023 = data.length && data[1]["year2023"].map((item)=>{
-    return <li>
-              <div className='date-wrap'>
-                <p className='date'>{item.date}</p>
-                <p className='memo'>{item.memo}</p>
-              </div>
-              <p className={`amount ${item.type === '수입' ? "in" : "out"}`}>{item.type === '수입' ? "+" : "-"}{item.amount}</p>
-            </li>
-  })
-
+  const listItem = data.map((item, i) => {
+    return item.items.length && item.items.map((subItem, j) => (
+      <li key={subItem.id}>
+        <div className='date-wrap'>
+          <p className='date'>{item.year}. {subItem.date}</p>
+          <p className='memo'>{subItem.memo}</p>
+        </div>
+        <p className={`amount ${subItem.type === '수입' ? "in" : "out"}`}>
+          {subItem.type === '수입' ? "+" : "-"}{subItem.amount}
+        </p>
+      </li>
+    ));
+  });
+  
   return (
     <div className='list'>
       <h2>연간내역</h2>
       <div className='list-wrap'>
         <ul>
-          {listItem2024}
-        </ul>
-        <ul>
-          {listItem2023}
+          {listItem}
         </ul>
       </div>
     </div>

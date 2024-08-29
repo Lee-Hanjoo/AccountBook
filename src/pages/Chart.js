@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ResponsiveBar } from '@nivo/bar'
+import { MyContext } from '../MyContext'
 
 const Chart = () => {
   const chartData = [
@@ -64,122 +65,134 @@ const Chart = () => {
       "out": 1000
     }
   ]
+  
+  const {state, setState} = useContext(MyContext)
 
+  useEffect(()=>{
+    setState(true);
+    // setState(true); 밑에꺼랑 같은 말임...
+    // setState((state)=>{return !state})
+    
+  },[])
 
   return (
-    <div className='chart'>
-      <h2>월별지출차트</h2>
-      <ResponsiveBar
-        data={chartData}
-        keys={["in", "out"]}
-        indexBy="id"
-        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
-        padding={0.3}
-        valueScale={{ type: 'linear' }}
-        indexScale={{ type: 'band', round: true }}
-        colors={{ scheme: 'nivo' }}
-        defs={[
-            {
-                id: 'dots',
-                type: 'patternDots',
-                background: 'inherit',
-                color: '#38bcb2',
-                size: 4,
-                padding: 1,
-                stagger: true
-            },
-            {
-                id: 'lines',
-                type: 'patternLines',
-                background: 'inherit',
-                color: '#eed312',
-                rotation: -45,
-                lineWidth: 6,
-                spacing: 10
-            }
-        ]}
-        fill={[
-            {
-                match: {
-                    id: 'fries'
+    <>
+      { state && 
+        <div className='chart'>
+          <h2>월별지출차트</h2>
+          <ResponsiveBar
+            data={chartData}
+            keys={["in", "out"]}
+            indexBy="id"
+            margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+            padding={0.3}
+            valueScale={{ type: 'linear' }}
+            indexScale={{ type: 'band', round: true }}
+            colors={{ scheme: 'nivo' }}
+            defs={[
+                {
+                    id: 'dots',
+                    type: 'patternDots',
+                    background: 'inherit',
+                    color: '#38bcb2',
+                    size: 4,
+                    padding: 1,
+                    stagger: true
                 },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'sandwich'
+                {
+                    id: 'lines',
+                    type: 'patternLines',
+                    background: 'inherit',
+                    color: '#eed312',
+                    rotation: -45,
+                    lineWidth: 6,
+                    spacing: 10
+                }
+            ]}
+            fill={[
+                {
+                    match: {
+                        id: 'fries'
+                    },
+                    id: 'dots'
                 },
-                id: 'lines'
-            }
-        ]}
-        borderColor={{
-            from: 'color',
-            modifiers: [
-                [
-                    'darker',
-                    1.6
+                {
+                    match: {
+                        id: 'sandwich'
+                    },
+                    id: 'lines'
+                }
+            ]}
+            borderColor={{
+                from: 'color',
+                modifiers: [
+                    [
+                        'darker',
+                        1.6
+                    ]
                 ]
-            ]
-        }}
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'month',
-            legendPosition: 'middle',
-            legendOffset: 32,
-            truncateTickAt: 0
-        }}
-        axisLeft={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'amount',
-            legendPosition: 'middle',
-            legendOffset: -40,
-            truncateTickAt: 0
-        }}
-        labelSkipWidth={12}
-        labelSkipHeight={12}
-        labelTextColor={{
-            from: 'color',
-            modifiers: [
-                [
-                    'darker',
-                    1.6
+            }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={{
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: 'month',
+                legendPosition: 'middle',
+                legendOffset: 32,
+                truncateTickAt: 0
+            }}
+            axisLeft={{
+                tickSize: 5,
+                tickPadding: 5,
+                tickRotation: 0,
+                legend: 'amount',
+                legendPosition: 'middle',
+                legendOffset: -40,
+                truncateTickAt: 0
+            }}
+            labelSkipWidth={12}
+            labelSkipHeight={12}
+            labelTextColor={{
+                from: 'color',
+                modifiers: [
+                    [
+                        'darker',
+                        1.6
+                    ]
                 ]
-            ]
-        }}
-        legends={[
-            {
-                dataFrom: 'keys',
-                anchor: 'bottom-right',
-                direction: 'column',
-                justify: false,
-                translateX: 120,
-                translateY: 0,
-                itemsSpacing: 2,
-                itemWidth: 100,
-                itemHeight: 20,
-                itemDirection: 'left-to-right',
-                itemOpacity: 0.85,
-                symbolSize: 20,
-                effects: [
-                    {
-                        on: 'hover',
-                        style: {
-                            itemOpacity: 1
+            }}
+            legends={[
+                {
+                    dataFrom: 'keys',
+                    anchor: 'bottom-right',
+                    direction: 'column',
+                    justify: false,
+                    translateX: 120,
+                    translateY: 0,
+                    itemsSpacing: 2,
+                    itemWidth: 100,
+                    itemHeight: 20,
+                    itemDirection: 'left-to-right',
+                    itemOpacity: 0.85,
+                    symbolSize: 20,
+                    effects: [
+                        {
+                            on: 'hover',
+                            style: {
+                                itemOpacity: 1
+                            }
                         }
-                    }
-                ]
-            }
-        ]}
-        role="application"
-        ariaLabel="Nivo bar chart demo"
-      />
-    </div>
+                    ]
+                }
+            ]}
+            role="application"
+            ariaLabel="Nivo bar chart demo"
+          />
+        </div>
+      }
+    </>
   )
 }
 
