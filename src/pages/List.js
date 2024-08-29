@@ -5,19 +5,36 @@ const List = () => {
   
   const {data} = useContext(MyContext)
 
-  console.log(data);
+  // 데이터가 들어오지도 않았는데 부르려고하니 안나옴.
+  // data.length가 있을때만 실행해라~
+  const listItem2024 = data.length && data[0]["year2024"].map((item)=>{
+    return <li>
+              <div className='date-wrap'>
+                <p className='date'>{item.date}</p>
+                <p className='memo'>{item.memo}</p>
+              </div>
+              <p className={`amount ${item.type === '수입' ? "in" : "out"}`}>{item.type === '수입' ? "+" : "-"}{item.amount}</p>
+            </li>
+  })
+  const listItem2023 = data.length && data[1]["year2023"].map((item)=>{
+    return <li>
+              <div className='date-wrap'>
+                <p className='date'>{item.date}</p>
+                <p className='memo'>{item.memo}</p>
+              </div>
+              <p className={`amount ${item.type === '수입' ? "in" : "out"}`}>{item.type === '수입' ? "+" : "-"}{item.amount}</p>
+            </li>
+  })
+
   return (
-    <div>
+    <div className='list'>
       <h2>연간내역</h2>
       <div className='list-wrap'>
         <ul>
-          <li>
-            <div className='date-wrap'>
-              <p className='date'>2024. 08. 27</p>
-              <p className='memo'>서브웨이 강남점</p>
-            </div>
-            <p className='amount in'>+ 1,000</p>
-          </li>
+          {listItem2024}
+        </ul>
+        <ul>
+          {listItem2023}
         </ul>
       </div>
     </div>
