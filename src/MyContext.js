@@ -4,6 +4,11 @@ import React,{createContext, useEffect, useReducer, useState} from 'react'
 
 const MyContext = createContext();
 
+/* countReducer = (oldCount, action) {
+  if(action === 'up') {
+    return oldCount + 1;
+  } else if ()......
+} */
 const reducer = (state, action) => {
   switch(action.type){
     case 'post': return [...state, action.data];
@@ -17,6 +22,8 @@ const reducer = (state, action) => {
 let Context = ({children}) => {
 
   const [state, setState] = useState(false)
+
+  // ** [count, countDispatch] = useReducer(countReducer, 0)
   const [data, dispatch] = useReducer(reducer, []);
 
   useEffect(()=>{
