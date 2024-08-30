@@ -8,7 +8,7 @@ const List = () => {
   // 데이터가 들어오지도 않았는데 부르려고하니 안나옴.
   // data.length가 있을때만 실행해라~
   const listItem = data.length && data.map((item)=>{
-    return <li>
+    return <li key={item.id}>
               <div className='date-wrap'>
                 <p className='date'>{item.date}</p>
                 <p className='memo'>{item.memo}</p>

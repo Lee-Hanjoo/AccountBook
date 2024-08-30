@@ -79,7 +79,7 @@ const Chart = () => {
     <>
       { state && 
         <div className='chart'>
-          <h2>월별지출차트</h2>
+          <h2>연간차트</h2>
           <ResponsiveBar
             data={chartData}
             keys={["in", "out"]}

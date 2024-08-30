@@ -7,13 +7,14 @@ const Insert = ({popup, setPopup }) => {
   const {data, dispatch } = useContext(MyContext);
   
   const [date, setDate] = useState('');
-  const [amount, setAmount] = useState();
+  const [amount, setAmount] = useState(0);
   const [memo, setMemo] = useState('');
   const [type, setType] = useState('');
   
   const [newdata, setNewdata] = useState();
   
-  let info = (e) => {
+  // let info ~~~~ [newdata]) 까지 오래걸림....... 데이터 업데이트 하는게 어려웠음.
+  let info = () => {
     setNewdata({id:Date.now(), date, amount, memo, type})
   }
   
@@ -32,26 +33,26 @@ const Insert = ({popup, setPopup }) => {
       <h2>내역추가</h2>
       <ul>
         <li className='date'>
-          <label for="date">날짜</label>
-          <input type='text' id='date' placeholder='연도. 월. 일' onChange={(e)=>{setDate(e.target.value)}} />
+          <label htmlFor="date">날짜</label>
+          <input type='text' id='date' placeholder='연도. 월' onChange={(e)=>{setDate(e.target.value)}} />
         </li>
         <li className='amount'>
-          <label for="amount">금액</label>
-          <input type='text' id='amount' placeholder='금액' onChange={(e)=>{setAmount(parseInt(e.target.value))}} />
+          <label htmlFor="amount">금액</label>
+          <input type='number' id='amount' placeholder='금액' onChange={(e)=>{setAmount(parseInt(e.target.value))}} />
         </li>
         <li className='memo'>
-          <label for="memo">메모</label>
+          <label htmlFor="memo">메모</label>
           <input type='text' id='memo' placeholder='메모' onChange={(e)=>{setMemo(e.target.value)}}/>
         </li>
         <li className='radio-wrap'>
           <input type="radio" name="in-or-out" className='radio' id="in" onChange={(e)=>{setType('수입')}} />
-          <label for="in"><i></i>수입</label>
+          <label htmlFor="in"><i></i>수입</label>
           <input type="radio" name="in-or-out" className='radio' id="out" onChange={(e)=>{setType('지출')}} />
-          <label for="out"><i></i>지출</label>
+          <label htmlFor="out"><i></i>지출</label>
         </li>
       </ul>
       <div className='btn-wrap'>
-        <button type='button' className='add-info' onClick={(e)=>{info(e); setPopup(false)}}>등록</button>
+        <button type='button' className='add-info' onClick={()=>{info(); setPopup(false)}}>등록</button>
         <button type='button' className='close' onClick={()=>{setPopup(false)}}>취소</button>
       </div>
     </div>

@@ -16,9 +16,6 @@ const reducer = (state, action) => {
   }
 }
 
-// 내역추가에 금액 +10만원 +1만원 +5천원 버튼
-// 리스트에 메세지 검색해서 내역 뽑기?
-
 let Context = ({children}) => {
 
   const [state, setState] = useState(false)
