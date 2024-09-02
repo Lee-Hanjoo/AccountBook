@@ -1,62 +1,57 @@
-import React, { useContext, useEffect } from 'react'
 import { ResponsiveBar } from '@nivo/bar'
-import { MyContext } from '../MyContext'
+import { useContext, useEffect } from 'react';
+import { Store } from '../t-AccountState';
 
-const Chart = () => {
-  const {data, state, currentDate, setState } = useContext(MyContext)
+function Chart() {
+    let {data,currentDate} = useContext(Store);
 
     // 년도 데이터 추출
-  let dataExt = data.filter(obj=>obj.date.includes(currentDate));
+    let dataExt = data.filter(obj=>obj.date.includes(currentDate));
 
-  //합산할 장소만들기
-  const defaultValue = { in: 0, out: 0 };
-  let total = new Array(12).fill().map(() => ({ ...defaultValue }));
-  
-  //수입 지출 합산
-  dataExt.forEach((obj,a)=>{
-      let dateArray = obj.date.split('.');
-      for(let i=0; i<=11; i++){
-          if(dateArray[1] == i){
-              if(obj.type == "수입"){
-                  total[i].in += obj.amount;
-              }else{
-                  total[i].out += obj.amount;
-              }                
-          }
-      };
-  });
-  
-  
-  // 차트데이터 생성
-  const chartData = total.map((obj,i)=>{
-    return {
-            "id": i+"월",      
-            "in": obj.in,
-            "out": obj.out,
-           }
-  })
-
-  useEffect(()=>{
-    setState(true);
-    // setState(true); 밑에꺼랑 같은 말임...
-    // setState((state)=>{return !state})
+    //합산할 장소만들기
+    const defaultValue = { income: 0, expense: 0 };
+    let total = new Array(12).fill().map(() => ({ ...defaultValue }));
     
-  },[])
+    //수입 지출 합산
+    dataExt.forEach((obj,a)=>{
+        let dateArray = obj.date.split('-');
+        for(let i=1; i<=12; i++){
+            if(dateArray[1] == i){                
+                if(obj.type == "수입"){
+                    total[i].income += Number(obj.money);
+                }else{
+                    total[i].expense += Number(obj.money);
+                }                
+            }
+        };
+    });
+
+    // 차트데이터 생성
+    let chartData = total.map((obj,i)=>{
+        return {
+                    "id": i+"월",      
+                    "income": obj.income,
+                    "expense": obj.expense,
+               }
+    })
+   
+
 
   return (
     <>
-      { state && 
-        <div className='chart'>
-          <h2>연간차트</h2>
-          <ResponsiveBar
+        <h3 className='bg-slate-100 text-center p-2'>월별차트</h3>
+        <div className='mx-auto  w-2/4 h-96'>
+    
+        <ResponsiveBar
             data={chartData}
-            keys={["in", "out"]}
+            keys={['income','expense']}
             indexBy="id"
             margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
             padding={0.3}
             valueScale={{ type: 'linear' }}
             indexScale={{ type: 'band', round: true }}
-            colors={{ scheme: 'nivo' }}
+            colors={["#99f","#fbb"]}
+
             defs={[
                 {
                     id: 'dots',
@@ -106,7 +101,7 @@ const Chart = () => {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'month',
+                legend: '월별 그래프',
                 legendPosition: 'middle',
                 legendOffset: 32,
                 truncateTickAt: 0
@@ -115,9 +110,9 @@ const Chart = () => {
                 tickSize: 5,
                 tickPadding: 5,
                 tickRotation: 0,
-                legend: 'amount',
-                legendPosition: 'middle',
-                legendOffset: -40,
+                legend: '',
+                legendPosition: 'start',
+                legendOffset: -50,
                 truncateTickAt: 0
             }}
             labelSkipWidth={12}
@@ -155,13 +150,17 @@ const Chart = () => {
                     ]
                 }
             ]}
+            motionConfig="stiff"
+
             role="application"
             ariaLabel="Nivo bar chart demo"
-          />
-        </div>
-      }
-    </>
-  )
+            
+        />
+    
+        </div>  
+    </>  
+   
+  );
 }
 
-export default Chart
+export default Chart;

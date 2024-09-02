@@ -14,7 +14,9 @@ import { MyContext } from '../MyContext'
 export const Home = () => {
   const [popup, setPopup] = useState(false);
 
-  const {data, setDateArr, setCurrentDate, type, setType , dataList, setDataList} = useContext(MyContext);
+  const [availableMonths, setAvailableMonths] = useState([]);
+
+  const {data, setDateArr, currentDate, setCurrentDate, type, setType , dataList, setDataList} = useContext(MyContext);
 
   let totalIn=0, totalOut=0;
 
@@ -58,11 +60,17 @@ export const Home = () => {
     
     setCurrentDate(y)
     setDataList(ext); 
-    console.log(data);
   }
+
+  const handleYearChange = (selectedYear) => {
+    const filteredData = data.filter(item => item.date.includes(selectedYear));
+    const uniqueMonths = [...new Set(filteredData.map(item => item.date.split('. ')[1]))];
+    setAvailableMonths(uniqueMonths);
+  };
  
   useEffect(()=>{
     handleDate();
+    handleYearChange('2024')
   },[])
   
 
@@ -77,19 +85,17 @@ export const Home = () => {
         <div className='view-wrap'>
           <div className="select-wrap">
             <div className='selects'>
-              <select name="year" id="year" defaultValue="2023" ref={yearRef} onChange={()=>{handleDate()}}>
+              <select name="year" id="year" defaultValue="2023" ref={yearRef} onChange={(e)=>{handleDate(); handleYearChange(e.target.value);}}>
                   {
                     year.map((v,i)=>(
-                      <option key={i}>{v}</option>
+                      <option key={i} value={v}>{v}</option>
                     ))
                   }
               </select>
               <select name="month" id="month" defaultValue="1" ref={monthRef} onChange={()=>{handleDate()}}>
-                  {
-                    month.map((v,i)=>(
-                      <option key={i}>{v}</option>
-                    ))
-                  }
+                {availableMonths.map((v, i) => (
+                  <option key={i} value={v}>{v}</option>
+                ))}
               </select>
             </div>
             <div className='sort-btn'>
