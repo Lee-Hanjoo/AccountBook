@@ -52,54 +52,11 @@ const Chart = () => {
             data={chartData}
             keys={["in", "out"]}
             indexBy="id"
-            margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+            margin={{ top: 40, right: 100, bottom: 80, left: 96 }}
             padding={0.3}
             valueScale={{ type: 'linear' }}
             indexScale={{ type: 'band', round: true }}
-            colors={{ scheme: 'nivo' }}
-            defs={[
-                {
-                    id: 'dots',
-                    type: 'patternDots',
-                    background: 'inherit',
-                    color: '#38bcb2',
-                    size: 4,
-                    padding: 1,
-                    stagger: true
-                },
-                {
-                    id: 'lines',
-                    type: 'patternLines',
-                    background: 'inherit',
-                    color: '#eed312',
-                    rotation: -45,
-                    lineWidth: 6,
-                    spacing: 10
-                }
-            ]}
-            fill={[
-                {
-                    match: {
-                        id: 'fries'
-                    },
-                    id: 'dots'
-                },
-                {
-                    match: {
-                        id: 'sandwich'
-                    },
-                    id: 'lines'
-                }
-            ]}
-            borderColor={{
-                from: 'color',
-                modifiers: [
-                    [
-                        'darker',
-                        1.6
-                    ]
-                ]
-            }}
+            colors={{ scheme: 'greens' }}
             axisTop={null}
             axisRight={null}
             axisBottom={{
@@ -108,7 +65,7 @@ const Chart = () => {
                 tickRotation: 0,
                 legend: 'month',
                 legendPosition: 'middle',
-                legendOffset: 32,
+                legendOffset: 40,
                 truncateTickAt: 0
             }}
             axisLeft={{
@@ -117,7 +74,7 @@ const Chart = () => {
                 tickRotation: 0,
                 legend: 'amount',
                 legendPosition: 'middle',
-                legendOffset: -40,
+                legendOffset: -60,
                 truncateTickAt: 0
             }}
             labelSkipWidth={12}

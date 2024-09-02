@@ -1,42 +1,217 @@
-#root {
-  width: 100%;
-  padding: 40px;
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn,
+em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
+output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0; 
+    border: 0;
+    box-sizing: border-box;
+    color: #2f2f2f;
+    font-size: 16px;
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.5;
+    letter-spacing: -1px;
+    font-weight: 400;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section,main {
+    display: block;
+}
+img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+button, input[type="button"] {
+    padding:0;
+    margin:0;
+    border:none;
+    vertical-align:middle;
+    cursor:pointer;
+    background:transparent;
+}
+button:not(:first-of-type) {
+  margin-left: 4px;
+}
+input, select, button, textarea {
+    outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    font-size: 14px;
+}
+input[type="checkbox"], input[type="radio"] {
+    display: none;
+}
+select {
+  padding: 8px 36px 8px 16px;
   position: relative;
+  background: #fff url('../public/imgs/icon_arrow_down.svg') no-repeat center right 12px / 16px;
+  border-radius: 999px;
+  color: #7f7f7f;
+  border: 1px solid #E7E9ED;
+  cursor: pointer;
 }
+select option {
+  color: #2f2f2f;
+}
+textarea {
+    width: 100%;
+    border: 1px solid #efefef;
+    font-family: "Montserrat", sans-serif;
+    resize: none;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 16px;
+}
+textarea::placeholder {
+    color: #afafaf;
+}
+button:focus {
+    outline:0;
+}
+input {
+    margin:0;
+    padding:0;
+    border:0;
+    font-family: "Montserrat", sans-serif;
+}
+input:read-only {
+    background-color: #efefef;
+}
+input::placeholder {
+    color: #afafaf;
+}
+hr {
+    display:none;
+}
+
+a {
+    color: inherit;
+    font-size: inherit;
+}
+a:link, a:visited, a:hover, a:active {
+    text-decoration:none;
+}
+
+.clearfix:after {
+    content:"";
+    visibility: hidden;
+    display: block;
+    height:0;
+    clear:both;
+}
+.hidden {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0; 
+    visibility: hidden;
+    font-size: 0; 
+    line-height: 0;
+    position: absolute; 
+    left: -9999px;
+}
+
 * {
-  box-sizing: border-box;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: 8px;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
 }
-select, input {
-  border: 1px solid #afafaf;
+#root {
+  padding: 40px;
 }
 button {
+  background-color: #afafaf;
+  color: #fff;
   cursor: pointer;
+  border-radius: 999px;
+  padding: 8px 12px 8px 32px;
+  line-height: 1;
 }
 h2 {
   margin-bottom: 12px;
   font-size: 16px;
   color: #2f2f2f;
+  font-weight: 700;
+}
+.total {
+  letter-spacing: 0px;
+}
+.dim {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 998;
+}
+.dim.on {
+  display: block;
 }
 .home {
-  border: 1px solid #000;
-  padding: 20px;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 20px;
+  border: 1px solid #efefef;
+  box-shadow: 4px 4px 12px rgba(57,57,57,0.1);
+}
+.home.non-scr {
+  height: 100%;
+  overflow: hidden;
 }
 .home .txt-wrap {
   margin-bottom: 20px;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: #efefef;
-  padding: 12px 40px;
+  justify-content: center; */
+  text-align: center;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 12px;
+}
+.home .txt-wrap p:first-of-type {
+  font-size: 16px;
+  margin-bottom: 2px;
 }
 .home .txt-wrap .total {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: 700;
+  color: #6AD35D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.home .txt-wrap .total span {
+  font-size: 24px;
 }
 .home .view-wrap .select-wrap {
   display: flex;
@@ -44,17 +219,20 @@ h2 {
   justify-content: space-between;
 }
 .home .view-wrap .select-wrap button {
-  height: 27px;
-  line-height: 27px;
-  padding: 0 8px;
-  background-color: #000;
-  color: #fff;
+  background: #fff url('../public/imgs/icon_check_circle.svg') no-repeat left 12px center / 16px;
+  font-weight: 500;
+  border: 2px solid #E7E9ED;
+  color: #ACB4BF;
 }
-.home .view-wrap .select-wrap button:not(:first-of-type) {
-  margin-left: 4px;
+.home .view-wrap .select-wrap .sort-btn .in-btn.on {
+  background-image: url('../public/imgs/icon_check_circle_in.svg');
+  color: #1fa1ec;
+  border-color: #1fa1ec;
 }
-.home .view-wrap .select-wrap select {
-  padding: 4px 16px 4px 4px;
+.home .view-wrap .select-wrap .sort-btn .out-btn.on {
+  background-image: url('../public/imgs/icon_check_circle_out.svg');
+  color: #FE5E66;
+  border-color: #FE5E66;
 }
 .home .view-wrap .select-wrap select:not(:first-of-type) {
   margin-left: 4px;
@@ -66,36 +244,48 @@ h2 {
   justify-content: space-between;
 }
 .home .view-wrap .in-out-wrap ul li {
-  border: 1px solid #000;
   width: calc(50% - 4px);
   padding: 20px;
   text-align: center;
+  border: 1px solid #efefef;
+  border-radius: 12px;
+  box-shadow: 2px 2px 8px rgba(57,57,57,0.05);
+}
+.home .view-wrap .in-out-wrap ul li p:first-of-type {
+  font-size: 12px;
+  font-weight: 700;
+}
+.home .view-wrap .in-out-wrap ul li .total {
+  font-size: 20px;
+  font-weight: 600;
 }
 .home .view-wrap .in-out-wrap ul li.in .total {
-  color: blue;
+  color: #1fa1ec;
 }
 .home .view-wrap .in-out-wrap ul li.out .total {
-  color: red;
+  color: #FE5E66;
 }
 .home .add-btn {
-  width: 100%;
-  padding: 12px;
+  padding: 12px 16px;
   background-color: #000;
   color: #fff;
   text-align: center;
+  border-radius: 8px;
 }
 
 .list {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .list .list-wrap {
-  height: 110px;
   padding: 20px 40px;
-  border: 1px solid #000;
-  overflow-y: auto;
+  border: 1px solid #efefef;
+  box-shadow: 2px 2px 8px rgba(57,57,57,0.05);
+  border-radius: 12px;
 }
 .list .list-wrap ul {
   width: 100%;
+  height: 60px;
+  overflow-y: auto;
 }
 .list .list-wrap ul:not(:first-of-type) {
   margin-top: 8px;
@@ -106,6 +296,9 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.list .list-wrap ul li p {
+  font-size: 14px;
 }
 .list .list-wrap ul li:not(:first-of-type) {
   margin-top: 8px;
@@ -120,11 +313,15 @@ h2 {
   margin-right: 8px;
   color: #afafaf;
 }
+.list .list-wrap ul li .amount {
+  font-weight: 500;
+  letter-spacing: 0px;
+}
 .list .list-wrap ul li .amount.in {
-  color: blue;
+  color: #1fa1ec;
 }
 .list .list-wrap ul li .amount.out {
-  color: red;
+  color: #FE5E66;
 }
 
 .chart {
@@ -134,7 +331,9 @@ h2 {
   margin-bottom: 75px;
 }
 .chart > div {
-  border: 1px solid #000;
+  border: 1px solid #efefef;
+  border-radius: 12px;
+  box-shadow: 2px 2px 8px rgba(57,57,57,0.05);
 }
 .insert {
   width: 400px;
@@ -145,7 +344,6 @@ h2 {
   top: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-  border: 1px solid #000;
   border-radius: 12px;
   opacity: 0;
   visibility: hidden;
@@ -172,31 +370,73 @@ h2 {
 .insert ul li:not(.radio-wrap) label {
   margin-bottom: 8px;
 }
+.insert ul li label {
+  font-size: 14px;
+  color: #5f5f5f;
+  font-weight: 500;
+}
 .insert ul li input {
   width: 100%;
   padding: 8px 12px;
+  border: 1px solid #efefef;
+  border-radius: 8px;
 }
 .insert ul .radio-wrap {
   display: flex;
   align-items: center;
+  margin-top: 24px !important;
 }
 .insert ul .radio-wrap .radio {
   width: 16px;
   height: 16px;
   margin-right: 4px;
 }
+.insert ul .radio-wrap .radio + label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.insert ul .radio-wrap .radio + label i {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #efefef;
+  border-radius: 50%;
+  margin-right: 4px;
+  position: relative;
+}
+.insert ul .radio-wrap .radio:checked + label i {
+  border-color: #2f2f2f;
+}
+.insert ul .radio-wrap .radio:checked + label i::after {
+  content: '';
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2f2f2f;
+}
+.insert ul .radio-wrap label + .radio + label {
+  margin-left: 12px;
+}
 .insert ul .radio-wrap .radio:not(:first-of-type) {
   margin-left: 12px;
 }
-.insert .btn-wrap {
-  margin-top: 20px;
+.btn-wrap {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+}
+.insert .btn-wrap {
+  margin-top: 20px;
 }
 .insert .btn-wrap button {
-  width: calc(50% - 4px);
-  padding: 8px 12px;
+  border-radius: 8px;
+  padding: 12px 20px;
 }
 .insert .btn-wrap .add-info {
   background-color: #000;

@@ -13,6 +13,7 @@ import { MyContext } from '../MyContext'
 
 export const Home = () => {
   const [popup, setPopup] = useState(false);
+  const [sortBtn, setSortBtn] = useState(false);
 
   const [availableMonths, setAvailableMonths] = useState([]);
 
@@ -22,6 +23,14 @@ export const Home = () => {
 
   // 년 월 추출
   let dateFilter = {y:[], m:[]};
+
+  const body = document.querySelector("body")
+  
+  if(popup) {
+    body.style.cssText = "overflow:hidden;"
+  } else {
+    body.style.cssText = "overflow:auto;"
+  }
 
   data.forEach((v,i)=>{
     if (v.type === '수입') {
@@ -57,6 +66,12 @@ export const Home = () => {
     if(e == '수입' || e == '지출'){
       ext = ext.filter(obj => obj.type === e);
     }
+
+    if(e == '수입') {
+      setSortBtn('수입')
+    } else if(e == '지출') {
+      setSortBtn('지출')
+    }
     
     setCurrentDate(y)
     setDataList(ext); 
@@ -77,10 +92,11 @@ export const Home = () => {
   
   return (
     <div className='home'>
+      <div className={`dim ${popup ? 'on' : ''}`}></div>
       <div>
         <div className='txt-wrap'>
           <p>자산 현황</p>
-          <p className='total'>{totalAmount}원</p>
+          <p className='total'>{totalAmount}<span>원</span></p>
         </div>
         <div className='view-wrap'>
           <div className="select-wrap">
@@ -99,8 +115,8 @@ export const Home = () => {
               </select>
             </div>
             <div className='sort-btn'>
-              <button type='button' className='in-btn' onClick={()=>{handleDate('수입')}}>수입</button>
-              <button type='button' className='out-btn' onClick={()=>{handleDate('지출')}}>지출</button>
+              <button type='button' className={`in-btn ${sortBtn === '수입' ? 'on' : ''}`} onClick={()=>{handleDate('수입')}}>수입</button>
+              <button type='button' className={`out-btn ${sortBtn === '지출' ? 'on' : ''}`} onClick={()=>{handleDate('지출')}}>지출</button>
             </div>
           </div>
           <div className='in-out-wrap'>
