@@ -2,14 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { MyContext } from '../MyContext';
 import axios from 'axios';
 
-const Insert = ({popup, setPopup }) => {
+const Insert = ({popup, setPopup, type, setType }) => {
 
   const {data, dispatch } = useContext(MyContext);
   
   const [date, setDate] = useState('');
   const [amount, setAmount] = useState(0);
   const [memo, setMemo] = useState('');
-  const [type, setType] = useState('');
+  // const [type, setType] = useState('');
   
   const [newdata, setNewdata] = useState();
   

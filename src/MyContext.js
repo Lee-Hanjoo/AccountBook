@@ -19,7 +19,10 @@ const reducer = (state, action) => {
 let Context = ({children}) => {
 
   const [state, setState] = useState(false)
+  const [currentDate,setCurrentDate] = useState(new Date().getUTCFullYear().toString());
 
+  const [dataList,setDataList] = useState([]);
+  const [type, setType] = useState('');
   // ** [count, countDispatch] = useReducer(countReducer, 0)
   const [data, dispatch] = useReducer(reducer, []);
 
@@ -33,8 +36,11 @@ let Context = ({children}) => {
   if(!data.length) {return <div>데이터가 없습니다.</div>}
   
   let valueNames = {
-    data, dispatch, state, setState
+    data, dispatch, state, setState, currentDate, setCurrentDate, dataList, setDataList, type, setType
   }
+
+  
+
 
   return(
     <MyContext.Provider value={valueNames}>

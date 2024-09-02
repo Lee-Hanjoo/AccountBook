@@ -39,7 +39,19 @@ h2 {
   font-weight: 700;
 }
 .home .view-wrap .select-wrap {
-  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.home .view-wrap .select-wrap button {
+  height: 27px;
+  line-height: 27px;
+  padding: 0 8px;
+  background-color: #000;
+  color: #fff;
+}
+.home .view-wrap .select-wrap button:not(:first-of-type) {
+  margin-left: 4px;
 }
 .home .view-wrap .select-wrap select {
   padding: 4px 16px 4px 4px;
