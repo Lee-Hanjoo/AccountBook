@@ -5,11 +5,11 @@ const List = () => {
   
   const {data, dataList } = useContext(MyContext)
 
+  
   // 데이터가 들어오지도 않았는데 부르려고하니 안나옴.
   // data.length가 있을때만 실행해라~
 
-  const listItem = dataList.length ?( 
-    dataList.map((item)=>{
+  const listItem = dataList.map((item)=>{
       return <li key={item.id}>
                 <div className='date-wrap'>
                   <p className='date'>{item.date}</p>
@@ -20,19 +20,21 @@ const List = () => {
                 </p>
               </li>
     })
-  ) : (
-    <>
-      <div className='no-data'>데이터가 없습니다.</div>
-    </>
-  )
 
     return (
     <div className='list'>
       <h2>월간내역</h2>
-      <div className='list-wrap'>
-        <ul>
-          {listItem}
-        </ul>
+      <div className={`list-wrap ${!dataList.length && 'no-data-box'}`}>
+        {
+          dataList.length ? (
+            <ul>
+              {listItem}
+            </ul>
+          ) : (
+            <div className='no-data'>데이터가 없습니다.</div>
+          )
+        }
+        
       </div>
     </div>
   )

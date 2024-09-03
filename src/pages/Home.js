@@ -53,13 +53,11 @@ export const Home = () => {
   const yearRef = useRef();
   const monthRef = useRef();
 
-  let formmDate='';
 
   // 데이터 필터링
   const handleDate = (e) => {
     let y = yearRef.current.value;
     let m = monthRef.current.value;
-    formmDate = `${y}. ${m}`;
 
     let ext = data.filter(obj=>obj.date.includes(y) && obj.date.includes(m));
 
@@ -72,6 +70,12 @@ export const Home = () => {
     } else if(e == '지출') {
       setSortBtn('지출')
     }
+
+    ext.sort((a, b) => {
+      const dateA = new Date(a.date.split('.').join('-'));
+      const dateB = new Date(b.date.split('.').join('-'));
+      return dateB - dateA;
+    });
     
     setCurrentDate(y)
     setDataList(ext); 
@@ -79,7 +83,7 @@ export const Home = () => {
 
   const handleYearChange = (selectedYear) => {
     const filteredData = data.filter(item => item.date.includes(selectedYear));
-    const uniqueMonths = [...new Set(filteredData.map(item => item.date.split('. ')[1]))];
+    const uniqueMonths = [...new Set(filteredData.map(item => item.date.split('.')[1]))].sort((a,b)=>b-a);
     setAvailableMonths(uniqueMonths);
   };
  
@@ -101,14 +105,14 @@ export const Home = () => {
         <div className='view-wrap'>
           <div className="select-wrap">
             <div className='selects'>
-              <select name="year" id="year" defaultValue="2023" ref={yearRef} onChange={(e)=>{handleDate(); handleYearChange(e.target.value);}}>
+              <select name="year" id="year" ref={yearRef} onChange={(e)=>{handleDate(); handleYearChange(e.target.value);}}>
                   {
                     year.map((v,i)=>(
                       <option key={i} value={v}>{v}</option>
                     ))
                   }
               </select>
-              <select name="month" id="month" defaultValue="1" ref={monthRef} onChange={()=>{handleDate()}}>
+              <select name="month" id="month" ref={monthRef} onChange={()=>{handleDate()}}>
                 {availableMonths.map((v, i) => (
                   <option key={i} value={v}>{v}</option>
                 ))}
@@ -133,7 +137,7 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      <List formmDate={formmDate} dataList={dataList} setDataList={setDataList}/>
+      <List dataList={dataList} setDataList={setDataList}/>
       <Chart />
       <div className='btn-wrap'>
         <button type='button' className='add-btn' onClick={()=>{setPopup(true)}}>내역 추가</button>

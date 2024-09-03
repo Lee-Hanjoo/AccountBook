@@ -10,12 +10,12 @@ const Chart = () => {
 
   //합산할 장소만들기
   const defaultValue = { in: 0, out: 0 };
-  let total = new Array(12).fill().map(() => ({ ...defaultValue }));
+  let total = new Array(13).fill().map(() => ({ ...defaultValue }));
   
   //수입 지출 합산
   dataExt.forEach((obj,a)=>{
       let dateArray = obj.date.split('.');
-      for(let i=0; i<=11; i++){
+      for(let i=1; i<=12; i++){
           if(dateArray[1] == i){
               if(obj.type == "수입"){
                   total[i].in += obj.amount;
@@ -28,9 +28,9 @@ const Chart = () => {
   
   
   // 차트데이터 생성
-  const chartData = total.map((obj,i)=>{
+  const chartData = total.slice(1).map((obj,i)=>{
     return {
-            "id": i+"월",      
+            "id": (i + 1) + "월",      
             "in": obj.in,
             "out": obj.out,
            }
@@ -56,7 +56,7 @@ const Chart = () => {
             padding={0.3}
             valueScale={{ type: 'linear' }}
             indexScale={{ type: 'band', round: true }}
-            colors={{ scheme: 'greens' }}
+            colors={{ scheme: 'nivo' }}
             axisTop={null}
             axisRight={null}
             axisBottom={{

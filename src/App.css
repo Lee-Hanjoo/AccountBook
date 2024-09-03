@@ -306,12 +306,21 @@ h2 {
   border-top: 1px solid #efefef;
 }
 .list .list-wrap ul li .date-wrap {
+  width: calc(100% - 100px);
   display: flex;
   align-items: center;
 }
 .list .list-wrap ul li .date-wrap .date {
+  width: 48px;
   margin-right: 8px;
   color: #afafaf;
+}
+.list .list-wrap ul li .date-wrap .memo {
+  width: calc(100% - 48px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
 }
 .list .list-wrap ul li .amount {
   font-weight: 500;
@@ -338,7 +347,7 @@ h2 {
 .insert {
   width: 400px;
   padding: 20px;
-  position: absolute;
+  position: fixed;
   margin-top: 20px;
   left: 50%;
   top: 50%;
@@ -441,4 +450,17 @@ h2 {
 .insert .btn-wrap .add-info {
   background-color: #000;
   color: #fff;
+}
+
+.no-data-box {
+  position: relative;
+  height: 102px;
+}
+.no-data {
+  font-size: 14px;
+  color: #afafaf;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
