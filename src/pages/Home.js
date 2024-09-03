@@ -17,7 +17,7 @@ export const Home = () => {
 
   const [availableMonths, setAvailableMonths] = useState([]);
 
-  const {data, setDateArr, currentDate, setCurrentDate, type, setType , dataList, setDataList} = useContext(MyContext);
+  const {data, setCurrentDate, type, setType , dataList, setDataList} = useContext(MyContext);
 
   let totalIn=0, totalOut=0;
 
@@ -25,6 +25,11 @@ export const Home = () => {
   let dateFilter = {y:[], m:[]};
 
   const body = document.querySelector("body")
+  const monthSelect = document.getElementById("month")
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // monthSelect.value('All')
+  })
   
   if(popup) {
     body.style.cssText = "overflow:hidden;"
@@ -46,7 +51,6 @@ export const Home = () => {
   // 연도 sort 
   // 이슈: 2024년엔 02데이터가 없는데 어떻ㄱ ㅔ뿌려줘야하는지..??
   let year = [...new Set(dateFilter.y)].sort((a,b)=>b-a)
-  let month = [...new Set(dateFilter.m)].sort((a,b)=>b-a)
   let totalAmount = (totalIn - totalOut);
 
 
@@ -60,7 +64,9 @@ export const Home = () => {
     let m = monthRef.current.value;
 
     let ext = data.filter(obj=>obj.date.includes(y) && obj.date.includes(m));
-
+    
+    
+    
     if(e == '수입' || e == '지출'){
       ext = ext.filter(obj => obj.type === e);
     }
@@ -69,6 +75,8 @@ export const Home = () => {
       setSortBtn('수입')
     } else if(e == '지출') {
       setSortBtn('지출')
+    } else if(e == 'changeSelect') {
+      setSortBtn('')
     }
 
     ext.sort((a, b) => {
@@ -88,7 +96,7 @@ export const Home = () => {
   };
  
   useEffect(()=>{
-    handleDate();
+    handleDate('');
     handleYearChange('2024')
   },[])
   
@@ -105,14 +113,15 @@ export const Home = () => {
         <div className='view-wrap'>
           <div className="select-wrap">
             <div className='selects'>
-              <select name="year" id="year" ref={yearRef} onChange={(e)=>{handleDate(); handleYearChange(e.target.value);}}>
+              <select name="year" id="year" ref={yearRef} onChange={(e)=>{handleDate('changeSelect'); handleYearChange(e.target.value);}}>
                   {
                     year.map((v,i)=>(
                       <option key={i} value={v}>{v}</option>
                     ))
                   }
               </select>
-              <select name="month" id="month" ref={monthRef} onChange={()=>{handleDate()}}>
+              <select name="month" id="month" ref={monthRef} onChange={()=>{handleDate('changeSelect')}}>
+                <option className="default" selected value={''}>All</option>
                 {availableMonths.map((v, i) => (
                   <option key={i} value={v}>{v}</option>
                 ))}
