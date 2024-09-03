@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/AccountBook/static/css/main.d297d9f6.css",
+    "main.js": "/AccountBook/static/js/main.21a3f5c6.js",
+    "static/js/453.ddefc589.chunk.js": "/AccountBook/static/js/453.ddefc589.chunk.js",
+    "static/media/icon_check_circle_in.svg": "/AccountBook/static/media/icon_check_circle_in.034c1ab319aefd0d8781.svg",
+    "static/media/icon_check_circle_out.svg": "/AccountBook/static/media/icon_check_circle_out.85c49351c4cf3d3317f8.svg",
+    "static/media/icon_check_circle.svg": "/AccountBook/static/media/icon_check_circle.1bc02cba946a15dac237.svg",
+    "static/media/icon_arrow_down.svg": "/AccountBook/static/media/icon_arrow_down.6fa7be211f3c370098f9.svg",
+    "index.html": "/AccountBook/index.html",
+    "main.d297d9f6.css.map": "/AccountBook/static/css/main.d297d9f6.css.map",
+    "main.21a3f5c6.js.map": "/AccountBook/static/js/main.21a3f5c6.js.map",
+    "453.ddefc589.chunk.js.map": "/AccountBook/static/js/453.ddefc589.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d297d9f6.css",
+    "static/js/main.21a3f5c6.js"
+  ]
+}
